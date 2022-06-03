@@ -1,0 +1,117 @@
+openapi: 3.1.0
+info:
+  title: Verwerkingenlog
+  version: '1.0'
+  description: |-
+    Deze API verzorgt het opvoeren, wijzigen, verwijderen en zoeken van verwerkingsactiviteiten in het
+    VAR. Met deze rest-API registreert en ontsluit de proceseigenaar verantwoordelijk voor
+    verwerkingsactiviteiten binnen zijn proces conform het Informatiemodel Gemeentelijke Verwerkingen.
+    Deze API moet te gebruiken zijn vanuit andere taakapplicaties (met name in Rotterdam PRIC, GRC,
+    Mendix, OpenForms, Rotterdaml.nl, RIO) en vanuit de bij het VAR behorende specifiek
+    beheerschermen in een beheerapplicatie.
+  summary: Register voor de vastlegging van de verwerking van gegevens door gemeentelijke informatiesystemen worden de doelbinding en grondslag als meta-gegevens bij de verwerking vastgelegd.
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/verwerkingsacties/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verwerkingsactie'
+      operationId: get-verwerkingsacties-id
+    put:
+      summary: ''
+      operationId: put-verwerkingsacties-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verwerkingsactie'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Verwerkingsactie'
+  /verwerkingsacties/:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type:
+                      - string
+                      - array
+                    items:
+                      $ref: '#/components/schemas/Verwerkingsactie'
+      operationId: get-verwerkingsacties
+    post:
+      summary: ''
+      operationId: post-verwerkingsacties
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Verwerkingsactie'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Verwerkingsactie'
+components:
+  schemas:
+    Verwerkingsactie:
+      title: Verwerkingsactie
+      type: object
+      properties:
+        id:
+          type: string
+        actie:
+          type: string
+        handeling:
+          type: string
+        verwerking:
+          type: string
+        verwerkingId:
+          type: string
+          format: uuid
+        verwerkingsActiviteitUrl:
+          type: string
+        vertrouwelijkheid:
+          type: string
+        bewaartermijn:
+          type: string
+        uitvoerder:
+          type: string
+        systeem:
+          type: string
+        gebruiker:
+          type: string
+        gegevensbron:
+          type: string
+        tijdstip:
+          type: string
+        verwerktObject:
+          type: string
